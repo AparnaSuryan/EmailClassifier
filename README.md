@@ -1,5 +1,5 @@
 # EmailClassifier
 
-Predicts whether the new incoming email is Spam or not.
+Predicts whether an email is Spam or not.
 
 Algorithm used : Support Vector Machines
