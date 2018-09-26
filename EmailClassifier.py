@@ -5,6 +5,7 @@ from sklearn.svm import SVC
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.externals import joblib
+from sklearn.metrics import accuracy_score
 
 df = pd.read_csv("spam.csv", encoding = 'latin-1')
 df.drop(['Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4'], 
@@ -17,7 +18,8 @@ df.drop(['labels'], axis = 1, inplace = True)
 def model(classifier, X, y):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
     classifier.fit(X_train, y_train)
-    accuracy = classifier.score(X_test, y_test)
+    predicted = classifier.predict(X_test)
+    accuracy = accuracy_score(y_test, predicted)
     return classifier, accuracy, X_test, y_test
 
 pipeline = Pipeline([('vectorizer', TfidfVectorizer()), 
